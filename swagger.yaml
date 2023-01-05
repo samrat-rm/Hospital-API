@@ -1,0 +1,338 @@
+openapi: 3.0.0
+info:
+    title: Hospital API
+    contact: {}
+    version: "1.0"
+servers:
+    - url: https://hospital-api-et5d.onrender.com/api/v1
+      variables: {}
+paths:
+    /psychiatrists/register:
+        post:
+            tags:
+                - Psychiatrist
+            summary: Register Psychiatrist
+            description: Requires a Psychiatrist's Name and Hospital name as "hospitalName"
+            operationId: RegisterPsychiatrist
+            parameters: []
+            requestBody:
+                description: ""
+                content:
+                    application/json:
+                        schema:
+                            allOf:
+                                - $ref: "#/components/schemas/RegisterPsychiatristRequest"
+                                - example:
+                                      hospitalName: AIIMS - All India Institute Of Medical Science
+                                      name: Kanag Raj
+                        example:
+                            hospitalName: AIIMS - All India Institute Of Medical Science
+                            name: Kanag Raj
+                required: true
+            responses:
+                "200":
+                    description: ""
+                    headers: {}
+            deprecated: false
+            security: []
+    /psychiatrists/{id}:
+        parameters:
+            - in: path
+              name: id
+              schema:
+                  type: string
+              required: true
+              description: The patient ID
+        get:
+            tags:
+                - Psychiatrist
+            summary: get Psychiatrist with Hospital ID
+            description: Requires Hospital ID as a parameter. You can find all the Hospital ID in "get all Hospital ID list"
+            operationId: getPsychiatristwithHospitalID
+            parameters: []
+            responses:
+                "200":
+                    description: ""
+                    headers: {}
+            deprecated: false
+            security: []
+    /psychiatrists:
+        get:
+            tags:
+                - Psychiatrist
+            summary: get all existing Psychiatrist
+            description: All the Psychiatrist data irrespective of the hospital they are from.
+            operationId: getallexistingPsychiatrist
+            parameters: []
+            responses:
+                "200":
+                    description: ""
+                    headers: {}
+            deprecated: false
+            security: []
+    /patients/{patientId}:
+        parameters:
+            - in: path
+              name: patientId
+              schema:
+                  type: string
+              required: true
+              description: The psychiatrist ID
+        get:
+            tags:
+                - Patient
+            summary: get Patient (psychiatrist ID)
+            description: Get all the patients of a particular psychiatrist. It requires a psychiatrist ID as a parameter.
+            operationId: getPatient(psychiatristID)
+            parameters: []
+            responses:
+                "200":
+                    description: ""
+                    headers: {}
+            deprecated: false
+            security: []
+    /patients:
+        post:
+            tags:
+                - Patient
+            summary: create Patient
+            description: "Requires all the patient data in the request body. Example \n{\n  \"name\": \"Mohammed Azooz\",\n  \"address\": \"2nd cross Road  \",\n  \"phone\": \"+917539511235\",\n  \"email\": \"azooz@gmail.com\",\n  \"psychiatristName\": \"Kanag Raj\",\n  \"photo\": \"http://google-drive.com/bcyw5721uju436c\"\n}"
+            operationId: createPatient
+            parameters: []
+            requestBody:
+                description: ""
+                content:
+                    application/json:
+                        schema:
+                            allOf:
+                                - $ref: "#/components/schemas/createPatientRequest"
+                                - example:
+                                      name: Mohammed Azooz
+                                      address: "2nd cross Road  "
+                                      phone: "+917539511235"
+                                      email: azooz@gmail.com
+                                      psychiatristName: Kanag Raj
+                                      photo: http://google-drive.com/bcyw5721uju436c
+                        example:
+                            name: Mohammed Azooz
+                            address: "2nd cross Road  "
+                            phone: "+917539511235"
+                            email: azooz@gmail.com
+                            psychiatristName: Kanag Raj
+                            photo: http://google-drive.com/bcyw5721uju436c
+                required: true
+            responses:
+                "200":
+                    description: ""
+                    headers: {}
+            deprecated: false
+            security: []
+    /patients/{delete}:
+        parameters:
+            - in: path
+              name: delete
+              schema:
+                  type: string
+              required: true
+              description: The patient ID to delete
+        delete:
+            tags:
+                - Patient
+            summary: Delete Patient
+            description: Delete patient details using the patient ID
+            operationId: DeletePatient
+            parameters: []
+            responses:
+                "200":
+                    description: ""
+                    headers: {}
+            deprecated: false
+            security: []
+    /patients/{id}:
+        parameters:
+            - in: path
+              name: id
+              schema:
+                  type: string
+              required: true
+              description: The patient ID
+        patch:
+            tags:
+                - Patient
+            summary: update patient
+            description: Update patient data using patient ID in the URL parameter and Pass the updated properties in the request body.
+            operationId: updatepatient
+            parameters: []
+            requestBody:
+                description: ""
+                content:
+                    application/json:
+                        schema:
+                            allOf:
+                                - $ref: "#/components/schemas/updatepatientrequest"
+                                - example:
+                                      name: "Revati "
+                        example:
+                            name: "Revati "
+                required: true
+            responses:
+                "200":
+                    description: ""
+                    headers: {}
+            deprecated: false
+            security: []
+    /hospitals:
+        post:
+            tags:
+                - Hospital
+            summary: Create Hospital
+            description: Only requires a name property in the request body.
+            operationId: CreateHospital
+            parameters: []
+            requestBody:
+                description: ""
+                content:
+                    application/json:
+                        schema:
+                            allOf:
+                                - $ref: "#/components/schemas/CreateHospitalRequest"
+                                - example:
+                                      name: AIIMS - All India Institute Of Medical Science
+                        example:
+                            name: AIIMS - All India Institute Of Medical Science
+                required: true
+            responses:
+                "200":
+                    description: ""
+                    headers: {}
+            deprecated: false
+            security: []
+        get:
+            tags:
+                - Hospital
+            summary: get all hospitals list
+            description: Get list of all the hospitals
+            operationId: getallhospitalslist
+            parameters: []
+            responses:
+                "200":
+                    description: ""
+                    headers: {}
+            deprecated: false
+            security: []
+    /hospitals/{id}:
+        parameters:
+            - in: path
+              name: id
+              schema:
+                  type: string
+              required: true
+              description: The hospital ID
+        delete:
+            tags:
+                - Hospital
+            summary: delete Hospital
+            description: Delete Hospital using the Hospital ID
+            operationId: deleteHospital
+            parameters: []
+            responses:
+                "200":
+                    description: ""
+                    headers: {}
+            deprecated: false
+            security: []
+    /details/{id}:
+        parameters:
+            - in: path
+              name: id
+              schema:
+                  type: string
+              required: true
+              description: The hospital ID
+        get:
+            tags:
+                - Details
+            summary: all details
+            operationId: alldetails
+            parameters: []
+            responses:
+                "200":
+                    description: ""
+                    headers: {}
+            deprecated: false
+            security: []
+components:
+    schemas:
+        RegisterPsychiatristRequest:
+            title: RegisterPsychiatristRequest
+            required:
+                - hospitalName
+                - name
+            type: object
+            properties:
+                hospitalName:
+                    type: string
+                name:
+                    type: string
+            example:
+                hospitalName: AIIMS - All India Institute Of Medical Science
+                name: Kanag Raj
+        createPatientRequest:
+            title: createPatientRequest
+            required:
+                - name
+                - address
+                - phone
+                - email
+                - psychiatristName
+                - photo
+            type: object
+            properties:
+                name:
+                    type: string
+                address:
+                    type: string
+                phone:
+                    type: string
+                email:
+                    type: string
+                psychiatristName:
+                    type: string
+                photo:
+                    type: string
+            example:
+                name: Mohammed Azooz
+                address: "2nd cross Road  "
+                phone: "+917539511235"
+                email: azooz@gmail.com
+                psychiatristName: Kanag Raj
+                photo: http://google-drive.com/bcyw5721uju436c
+        updatepatientrequest:
+            title: updatepatientrequest
+            required:
+                - name
+            type: object
+            properties:
+                name:
+                    type: string
+            example:
+                name: "Revati "
+        CreateHospitalRequest:
+            title: CreateHospitalRequest
+            required:
+                - name
+            type: object
+            properties:
+                name:
+                    type: string
+            example:
+                name: AIIMS - All India Institute Of Medical Science
+tags:
+    - name: Details
+      description: "(send hospital Id and get all details)"
+    - name: Psychiatrist
+      description: ""
+    - name: Patient
+      description: ""
+    - name: Hospital
+      description: ""
