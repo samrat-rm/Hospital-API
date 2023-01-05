@@ -3,6 +3,7 @@ require("express-async-errors"); // async wrapper
 const express = require("express");
 const app = express();
 const connectDB = require("./db/connect");
+const cors = require("cors");
 const psychiatristRouter = require("./routes/psychiatrist");
 const patientRouter = require("./routes/patient");
 const hospitalRouter = require("./routes/hospital");
@@ -11,6 +12,7 @@ const notFoundMiddleware = require("./middleware/not-found");
 const errorHandlerMiddleware = require("./middleware/error-handler");
 
 app.use(express.json());
+app.use(cors());
 app.get("/", (req, res) => {
     res.send("<h1>Hospital API</h1><a href='/api-docs'>Documentation</a>");
 });

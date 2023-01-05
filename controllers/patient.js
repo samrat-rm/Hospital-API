@@ -5,7 +5,7 @@ const Patient = require("../model/patient");
 
 const getAllPatients = async (req, res) => {
     // we get psychiatrist ID
-    let psychiatristID = req.params.id;
+    let psychiatristID = req.params.patientId;
     const psychiatrist = await Psychiatrist.findOne({ _id: psychiatristID });
     if (!psychiatrist) {
         throw new NotFoundError("Please enter a valid Psychiatrist ID");
@@ -63,7 +63,7 @@ const updatePatient = async (req, res) => {
 
 const deletePatients = async (req, res) => {
     // we get patient ID
-    const patientId = req.params.id;
+    const patientId = req.params.delete;
     const patient = await Patient.findOneAndDelete({ _id: patientId });
     if (!patient) {
         throw new NotFoundError("Patient not found");
