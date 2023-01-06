@@ -8,16 +8,16 @@ It a hospitals data management application. Where there are hospitals where psyc
 * Mongo DB 
 
 ## Frameworks and libraries 
-cors
-dotenv
-express
-express-async-errors
-http-status-codes
-jsonwebtoken
-mongoose
-swagger-ui-express
-yamljs
-nodemon
+* cors
+* dotenv
+* express
+* express-async-errors
+* http-status-codes
+* jsonwebtoken
+* mongoose
+* swagger-ui-express
+* yamljs
+* nodemon
 
 
 #### Setup
